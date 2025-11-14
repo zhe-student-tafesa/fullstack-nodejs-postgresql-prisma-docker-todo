@@ -7,14 +7,21 @@ const app = express()
 const PORT = 8383
 
 // mock DB
-let data = {
-    name: "Frank"
-}
+let data = ["Frank"]
+
+// use middleware to config SERVER
+app.use(express.json())
 
 // HTTP Verb && Roures (or paths)
 app.get('/', (req, res) => {
     console.log(`Server get / `, req.method)
-    res.send('<h1>This is Homepage</h1>')
+    // JSON.stringify is used to convert an object into a displayable string.
+    res.send(`
+        <body style="background:pink; color: blue">
+            <h1>This is Homepage</h1>
+            <p>${JSON.stringify(data)}</p>
+        <body>
+        `)
 })
 
 app.get('/try-string', (req, res) => {
@@ -31,6 +38,14 @@ app.get('/try-html', (req, res) => {
 app.get('/api/data', (req, res) => {
     console.log('This is for data')
     res.send(data)
+})
+
+app.post('/api/data', (req, res) => {
+    const newEntry = req.body;
+    console.log(newEntry)
+    // mock: save to DB
+    data.push(newEntry.name)
+    res.sendStatus(201)
 })
 
 app.listen(PORT, () => {

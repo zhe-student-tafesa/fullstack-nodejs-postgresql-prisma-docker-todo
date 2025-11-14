@@ -50,6 +50,12 @@ app.post('/api/data', (req, res) => {
     res.sendStatus(201)
 })
 
+// DELETE
+app.delete('/api/data', (req, res) => {
+    data.pop()
+    res.sendStatus(204)
+})
+
 app.listen(PORT, () => {
     console.log(`Server has started on: ${PORT}`)
 })

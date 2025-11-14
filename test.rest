@@ -12,3 +12,5 @@ Content-Type: application/json
 {
     "name": "new name 258"
 }
+### TEST DELETE /api/data
+DELETE http://localhost:8383/api/data

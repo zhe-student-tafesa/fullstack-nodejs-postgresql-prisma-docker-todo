@@ -1,0 +1,6 @@
+### TEST GET /
+GET http://localhost:8383
+
+
+### TEST GET /api/data
+GET http://localhost:8383/api/data

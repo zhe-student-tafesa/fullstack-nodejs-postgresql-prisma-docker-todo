@@ -14,7 +14,7 @@ let data = {
 // HTTP Verb && Roures (or paths)
 app.get('/', (req, res) => {
     console.log(`Server get / `, req.method)
-    res.sendStatus(200)
+    res.send('<h1>This is Homepage</h1>')
 })
 
 app.get('/try-string', (req, res) => {

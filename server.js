@@ -40,10 +40,12 @@ app.get('/api/data', (req, res) => {
     res.send(data)
 })
 
+// Type 2 - API endpoints (non visual)
 app.post('/api/data', (req, res) => {
+    // get data from body
     const newEntry = req.body;
     console.log(newEntry)
-    // mock: save to DB
+    // mock: save user to DB
     data.push(newEntry.name)
     res.sendStatus(201)
 })

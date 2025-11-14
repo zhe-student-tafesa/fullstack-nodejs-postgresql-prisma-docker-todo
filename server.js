@@ -5,7 +5,12 @@ import express from "express"
 
 const app = express()
 const PORT = 8383
-console.log(`Server has not started 123`)
+
+// HTTP Verb && Roures (or paths)
+app.get('/', (req, res) => {
+    console.log(`Server get / `, req.method)
+    res.sendStatus(200)
+})
 app.listen(PORT, () => {
     console.log(`Server has started on: ${PORT}`)
 })

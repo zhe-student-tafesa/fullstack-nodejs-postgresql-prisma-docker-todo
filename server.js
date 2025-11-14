@@ -16,11 +16,13 @@ app.use(express.json())
 app.get('/', (req, res) => {
     console.log(`Server get / `, req.method)
     // JSON.stringify is used to convert an object into a displayable string.
+    console.log('Hello from server: homepage')
     res.send(`
         <body style="background:pink; color: blue">
             <h1>This is Homepage</h1>
             <p>${JSON.stringify(data)}</p>
         <body>
+        <script>console.log('Hello from client')</script>
         `)
 })
 
@@ -37,7 +39,7 @@ app.get('/try-html', (req, res) => {
 // like login POST request, or get data
 app.get('/api/data', (req, res) => {
     console.log('This is for data')
-    res.send(data)
+    res.status(209).send(data)
 })
 
 // Type 2 - API endpoints (non visual)

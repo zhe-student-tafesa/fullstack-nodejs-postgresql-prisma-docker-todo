@@ -4,6 +4,8 @@
 import express from "express"
 import path, { dirname } from 'path'
 import { fileURLToPath } from "url"
+import authRouter from './routes/authRoures.js'  // MUST have .js
+import todoRouter from './routes/todoRoutes.js'  // MUST have .js
 
 const app = express()
 const PORT = process.env.PORT || 5003
@@ -20,10 +22,15 @@ app.use(express.json())
 // Tells express to serve all files from the public folder as static assets / file. Any requests for the css files will be resolved to the public directory.
 app.use(express.static(path.join(__dirname, '../public')))
 
+
 //Serving up the HTML file from the public folder
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'))
 })
+
+// Routes
+app.use('/auth', authRouter)
+app.use('/todo', todoRouter)
 
 app.listen(PORT, () => {
     console.log(`Server has started on: ${PORT}`)

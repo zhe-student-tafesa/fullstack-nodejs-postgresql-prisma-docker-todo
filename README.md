@@ -55,6 +55,8 @@ Run Docker Compose: Build and run the Node.js app and PostgreSQL using Docker Co
 Interact with the API: Use the frontend or API client (e.g., Postman) to register, login, and manage todos.
 This project structure and workflow will help organize your code and make it easier to maintain and scale as your application grows.
 
+Install nvm: nvm -v,  nvm install 22, nvm use 22   
+
 Getting Started
 Install Docker Desktop
 

@@ -1,16 +1,2 @@
 ### TEST GET /
-GET http://localhost:8383
-
-
-### TEST GET /api/data
-GET http://localhost:8383/api/data
-
-### TEST POST /api/data   mock signup
-POST http://localhost:8383/api/data
-Content-Type: application/json
-
-{
-    "name": "new name 258"
-}
-### TEST DELETE /api/data
-DELETE http://localhost:8383/api/data
+GET http://localhost:5003

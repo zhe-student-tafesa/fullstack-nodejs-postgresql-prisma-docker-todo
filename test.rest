@@ -9,3 +9,12 @@ Content-Type: application/json
     "username": "username01",
     "password": "password02"
 }
+
+### POST login a user
+POST http://localhost:5003/auth/login
+Content-Type: application/json
+
+{
+    "username": "",
+    "password": ""
+}

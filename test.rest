@@ -1,2 +1,11 @@
 ### TEST GET /
 GET http://localhost:5003
+
+### POST: Register a user (Test 03)
+POST http://localhost:5003/auth/register
+Content-Type: application/json
+
+{
+    "username": "username01",
+    "password": "password02"
+}

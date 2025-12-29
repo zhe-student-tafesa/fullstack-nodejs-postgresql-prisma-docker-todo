@@ -18,3 +18,9 @@ Content-Type: application/json
     "username": "test@gmail.com",
     "password": "123456"
 }
+
+### GET get all todos
+GET http://localhost:5003/todos
+
+
+### POST create a todo

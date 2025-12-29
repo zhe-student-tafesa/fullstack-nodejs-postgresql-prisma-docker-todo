@@ -7,7 +7,7 @@ const router = express.Router()
 router.get('/', (req, res) => {
     const getTodos = db.prepare('SELECT * FROM todos WHERE user_id = ?')
     const todos = getTodos.all(req.userId)
-    console.log("Get all todos")
+    // console.log("Get all todos")
     res.json(todos)
 })
 

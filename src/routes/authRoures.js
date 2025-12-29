@@ -15,7 +15,7 @@ router.post('/register', (req, res) => {
 
     // encrypt the password 
     const hashedPassword = bcrypt.hashSync(password, 8)
-    console.log(hashedPassword)
+    // console.log(hashedPassword)
 
     // // Save user name and hashedPassword to DB 
     try {
@@ -34,7 +34,7 @@ router.post('/register', (req, res) => {
             { expiresIn: '24h' }
 
         )
-        console.log(`token: ${token}`)
+        // console.log(`token: ${token}`)
         // confirm they are the correct user: 111 pass json to frontend
         res.json({ token: token })
     } catch (error) {
@@ -46,9 +46,11 @@ router.post('/register', (req, res) => {
 
 router.post('/login', (req, res) => {
     const { username, password } = req.body;
+    // console.log(`login user: ${username}   ${password}  `)
     try {
         const getUser = db.prepare('SELECT * FROM users WHERE username = ?')
         const user = getUser.get(username)
+        // console.log(`login user: ${user}`)
 
         if (!user) { return res.status(404).send({ message: "User not found" }) }
 
@@ -56,6 +58,7 @@ router.post('/login', (req, res) => {
         if (!passwordIsValid) return res.status(401).send({ message: "Invalid password" })
 
         // successful
+        // encode id
         console.log(user)
         const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, { expiresIn: '24h' })
         res.json({ token: token })

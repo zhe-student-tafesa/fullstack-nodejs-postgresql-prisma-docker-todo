@@ -31,6 +31,7 @@ app.get('/', (req, res) => {
 
 // Routes
 app.use('/auth', authRouter)
+// all todoRouter are protected by our authMiddleware
 app.use('/todos', authMiddleware, todoRouter)
 
 app.listen(PORT, () => {

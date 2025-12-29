@@ -19,8 +19,7 @@ Content-Type: application/json
     "password": "123456"
 }
 
-### GET get all todos
-GET http://localhost:5003/todos
-
-
+### GET get all todos (protected)
+GET http://localhost:5003/todos 
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzY2OTkwNDE3LCJleHAiOjE3NjcwNzY4MTd9.H5Obf3atpafSKDpYzTrfztsq9oA7IAjQq5xDWd36pL0
 ### POST create a todo

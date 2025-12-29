@@ -14,13 +14,13 @@ router.get('/', (req, res) => {
 // Create a new todo
 router.post('/', (req, res) => {
     const { task } = req.body
-    if (!task) { return res.status(401).json({ message: "No task provided" }) }
+    // if (!task) { return res.status(401).json({ message: "No task provided" }) }
     try {
-        const insertTodo = db.prepare('INSERT INTO todos (user_id, task) VALUES (?, ?)')
+        const insertTodo = db.prepare(`INSERT INTO todos (user_id, task) VALUES (?, ?)`)
         const result = insertTodo.run(req.userId, task)
         //  `res.sendStatus(201)` is equivalent to 👇
         //  `res.status(201).send('Created')`
-        return res.sendStatus(201)
+        return res.json({ task: task, id: result.lastInsertRowid, completed: 0 })
     } catch (error) {
         console.log(error.message)
         return res.status(501).json({ message: "Server error" })

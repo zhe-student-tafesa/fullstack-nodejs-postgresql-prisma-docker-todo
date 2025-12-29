@@ -251,6 +251,7 @@
 
     async function fetchTodos() {
         isLoading = true
+        // In HTTP headers: add token
         const response = await fetch(apiBase + 'todos', {
             headers: { 'Authorization': token }
         })

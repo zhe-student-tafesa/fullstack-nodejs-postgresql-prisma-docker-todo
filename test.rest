@@ -1,16 +1,20 @@
 ### TEST GET /
-GET http://localhost:8383
+GET http://localhost:5003
 
-
-### TEST GET /api/data
-GET http://localhost:8383/api/data
-
-### TEST POST /api/data   mock signup
-POST http://localhost:8383/api/data
+### POST: Register a user (Test 03)
+POST http://localhost:5003/auth/register
 Content-Type: application/json
 
 {
-    "name": "new name 258"
+    "username": "test@gmail.com",
+    "password": "123456"
 }
-### TEST DELETE /api/data
-DELETE http://localhost:8383/api/data
+
+### POST login a user
+POST http://localhost:5003/auth/login
+Content-Type: application/json
+
+{
+    "username": "test@gmail.com",
+    "password": "123456"
+}

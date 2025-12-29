@@ -55,7 +55,8 @@ Run Docker Compose: Build and run the Node.js app and PostgreSQL using Docker Co
 Interact with the API: Use the frontend or API client (e.g., Postman) to register, login, and manage todos.
 This project structure and workflow will help organize your code and make it easier to maintain and scale as your application grows.
 
-Install nvm: nvm -v,  nvm install 22, nvm use 22   
+Install nvm: nvm -v,  nvm install 22, nvm use 22 
+run: Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned  
 
 Getting Started
 Install Docker Desktop
@@ -115,3 +116,6 @@ Install the REST Client extension for VS Code.
 Open todo-app.rest.
 Run the requests by clicking on the "Send Request" link above each block of HTTP code.
 Make sure to copy the token from the login response and replace {{token}} with the actual JWT token for protected routes.
+
+test@gmail.com
+123456

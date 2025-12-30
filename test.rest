@@ -31,3 +31,12 @@ Content-Type: application/json
 {
     "task": "test task 02"
 }
+
+### PUT update id=2: completed
+PUT http://localhost:5003/todos/2?page=4
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzY2OTkwODk3LCJleHAiOjE3NjcwNzcyOTd9.TVZ3E6VuOl1bUvZqhJ1RohT5qKV4wcED7io4WDMlolA
+Content-Type: application/json
+
+{
+    "completed": 1
+}

@@ -27,8 +27,23 @@ router.post('/', (req, res) => {
     }
 })
 
-// Update a todo
+// Update a todo: done or undo
 router.put('/:id', (req, res) => {
+    const { completed } = req.body
+    const { id } = req.params
+
+    // demo: how to pass para using ?query
+    const { page } = req.query
+    console.log("page: ", page)
+    try {
+        const updateTodo = db.prepare(`UPDATE todos SET completed = ? WHERE id = ?`)
+        updateTodo.run(completed, id)
+        res.json({ message: "Todo completed" })
+    } catch (error) {
+        console.log(error.message)
+        return res.status(501).json({ message: "Server error: UPDATE" })
+    }
+
 
 })
 

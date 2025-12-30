@@ -40,3 +40,8 @@ Content-Type: application/json
 {
     "completed": 1
 }
+
+### DELETE id=2
+DELETE http://localhost:5003/todos/2
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzY2OTkwODk3LCJleHAiOjE3NjcwNzcyOTd9.TVZ3E6VuOl1bUvZqhJ1RohT5qKV4wcED7io4WDMlolA
+

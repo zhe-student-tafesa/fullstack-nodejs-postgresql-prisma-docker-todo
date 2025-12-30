@@ -49,6 +49,16 @@ router.put('/:id', (req, res) => {
 
 // Delete a todo
 router.delete('/:id', (req, res) => {
+    const { id } = req.params
+    const userId = req.userId
+    try {
+        const deleteTodo = db.prepare(`DELETE FROM todos where id = ? AND user_id = ?`)
+        deleteTodo.run(id, userId)
+        res.json({ message: "Deleted" })
+    } catch (error) {
+        console.log(error.message)
+        return res.status(501).json({ message: "Server error: Delete" })
+    }
 
 })
 

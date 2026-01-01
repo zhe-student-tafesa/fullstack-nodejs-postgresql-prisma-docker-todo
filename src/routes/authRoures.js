@@ -2,12 +2,13 @@ import express from 'express'
 import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 import db from '../db.js'
+import prisma from '../prismaClient.js'
 
 const router = express.Router()
 
 // Backtend 02
 // Register a new user endpoint /  auth/register
-router.post('/register', (req, res) => {
+router.post('/register', async (req, res) => {
     const { username, password } = req.body
     // console.log(username, password)
     // Save user name and an irreversibly encrypted password 
@@ -19,17 +20,30 @@ router.post('/register', (req, res) => {
 
     // // Save user name and hashedPassword to DB 
     try {
-        const insertUser = db.prepare(`INSERT INTO users (username, password) VALUES (?, ?)`)
-        const result = insertUser.run(username, hashedPassword)
+        // const insertUser = db.prepare(`INSERT INTO users (username, password) VALUES (?, ?)`)
+        // const result = insertUser.run(username, hashedPassword)
+        const user = await prisma.user.create({
+            data: {
+                username: username,
+                password: hashedPassword
+            }
+        })
+
 
         // insert a default todo
         const defaultTodo = 'Hello :) Add your first todo!'
-        const insertTodo = db.prepare(`INSERT INTO todos (user_id, task) VALUES (?, ?)`)
-        insertTodo.run(result.lastInsertRowid, defaultTodo)
+        // const insertTodo = db.prepare(`INSERT INTO todos (user_id, task) VALUES (?, ?)`)
+        // insertTodo.run(result.lastInsertRowid, defaultTodo)
+        prisma.todo.create({
+            data: {
+                user_id: user.id,
+                task: defaultTodo
+            }
+        })
 
         // create a token
         const token = jwt.sign(
-            { id: result.lastInsertRowid },
+            { id: user.id },
             process.env.JWT_SECRET,
             { expiresIn: '24h' }
 

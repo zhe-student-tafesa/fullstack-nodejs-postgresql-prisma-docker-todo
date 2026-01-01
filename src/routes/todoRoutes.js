@@ -18,15 +18,21 @@ router.get('/', async (req, res) => {
 })
 
 // Create a new todo
-router.post('/', (req, res) => {
+router.post('/', async (req, res) => {
     const { task } = req.body
     // if (!task) { return res.status(401).json({ message: "No task provided" }) }
     try {
-        const insertTodo = db.prepare(`INSERT INTO todos (user_id, task) VALUES (?, ?)`)
-        const result = insertTodo.run(req.userId, task)
+        // const insertTodo = db.prepare(`INSERT INTO todos (user_id, task) VALUES (?, ?)`)
+        // const result = insertTodo.run(req.userId, task)
+        const todo = await prisma.todo.create({
+            data: {
+                userId: req.userId,
+                task: task
+            }
+        })
         //  `res.sendStatus(201)` is equivalent to 👇
         //  `res.status(201).send('Created')`
-        return res.json({ task: task, id: result.lastInsertRowid, completed: 0 })
+        return res.json(todo)
     } catch (error) {
         console.log(error.message)
         return res.status(501).json({ message: "Server error" })
@@ -34,7 +40,7 @@ router.post('/', (req, res) => {
 })
 
 // Update a todo: done or undo
-router.put('/:id', (req, res) => {
+router.put('/:id', async (req, res) => {
     const { completed } = req.body
     const { id } = req.params
 
@@ -42,9 +48,18 @@ router.put('/:id', (req, res) => {
     const { page } = req.query
     console.log("page: ", page)
     try {
-        const updateTodo = db.prepare(`UPDATE todos SET completed = ? WHERE id = ?`)
-        updateTodo.run(completed, id)
-        res.json({ message: "Todo completed" })
+        // const updateTodo = db.prepare(`UPDATE todos SET completed = ? WHERE id = ?`)
+        // updateTodo.run(completed, id)
+        const updatedTodo = await prisma.todo.update({
+            where: {
+                id: parseInt(id),
+                userId: req.userId
+            },
+            data: {
+                completed: !!completed
+            }
+        })
+        res.json(updatedTodo)
     } catch (error) {
         console.log(error.message)
         return res.status(501).json({ message: "Server error: UPDATE" })
@@ -54,12 +69,18 @@ router.put('/:id', (req, res) => {
 })
 
 // Delete a todo
-router.delete('/:id', (req, res) => {
+router.delete('/:id', async (req, res) => {
     const { id } = req.params
     const userId = req.userId
     try {
-        const deleteTodo = db.prepare(`DELETE FROM todos where id = ? AND user_id = ?`)
-        deleteTodo.run(id, userId)
+        // const deleteTodo = db.prepare(`DELETE FROM todos where id = ? AND user_id = ?`)
+        // deleteTodo.run(id, userId)
+        await prisma.todo.delete({
+            where: {
+                id: parseInt(id),
+                userId: userId
+            }
+        })
         res.json({ message: "Deleted" })
     } catch (error) {
         console.log(error.message)

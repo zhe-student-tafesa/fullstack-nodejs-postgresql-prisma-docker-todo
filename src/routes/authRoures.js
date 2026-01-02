@@ -34,9 +34,9 @@ router.post('/register', async (req, res) => {
         const defaultTodo = 'Hello :) Add your first todo!'
         // const insertTodo = db.prepare(`INSERT INTO todos (user_id, task) VALUES (?, ?)`)
         // insertTodo.run(result.lastInsertRowid, defaultTodo)
-        prisma.todo.create({
+        await prisma.todo.create({
             data: {
-                user_id: user.id,
+                userId: user.id,
                 task: defaultTodo
             }
         })

@@ -119,3 +119,21 @@ Make sure to copy the token from the login response and replace {{token}} with t
 
 test@gmail.com
 123456
+
+# ⭐ Key point: First copy the prisma schema.
+COPY prisma ./prisma
+
+# ⭐ generate Prisma Client
+RUN npx prisma generate
+1. npx prisma generate  
+2. docker compose build
+3. docker compose run app npx prisma migrate dev  --name init
+     docker compose run： Temporary containers perform one-time tasks
+     app： Use the image/environment of the app service to run commands.
+     `npx`: The Node.js package executor. Look for `prisma` in `node_modules/bin`. If it's not there, download it globally or temporarily (you have it locally).
+    prisma`: Prisma's CLI tool.
+    migrate`: Prisma's database migration module.
+    dev`: Development mode migration, not for production environments.
+    --name init`: Name this migration.
+
+

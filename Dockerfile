@@ -4,6 +4,8 @@ FROM node:22-alpine
 # Set the working directory in the container.
 WORKDIR /app
 
+RUN apk add --no-cache bash curl git openssl libc6-compat
+
 # Copy the package.json and package-lock.json (from local) to /app (to container).
 COPY package*.json .
 
@@ -17,4 +19,3 @@ COPY . .
 EXPOSE 5003
 
 # Define the command to run your application. like: npm run dev
-CMD ["node", "./src/server.js"]
